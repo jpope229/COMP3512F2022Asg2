@@ -28,41 +28,52 @@ document.addEventListener("DOMContentLoaded", function() {
         
         //create td for title 
         const songDataTitle = document.createElement("td");
-        songDataTitle.textContent= s["title"];
-        
-        //FOR JUVE this line is outputting the popularity as the first TD instead of the song title, i can't figure out why its doing that
+        //add data inside of td
+        songDataTitle.textContent= s["title"];    
+        //Insert song title into the TD
         songRow.insertAdjacentElement('beforeend',songDataTitle);
+        //add td1 (Song title)
         tableBody.insertAdjacentElement('afterend', songRow);
 
         //create td for artist name 
         const songDataArtist = document.createElement("td");
+        //add data inside of td
         songDataArtist.textContent = s["artist"]["name"];
+        //add td2 (Artist name)
         songRow.appendChild(songDataArtist);
 
         //create td for year 
         const songDataYear = document.createElement("td");
+        //add data inside of td
         songDataYear.textContent = s["year"];
+        //add the year td to the row
         songRow.appendChild(songDataYear);
 
         //create td for genre
         const songDataGenre = document.createElement("td");
+        //add data inside of td
         songDataGenre.textContent = s["genre"]["name"];
+        //add the genre td to the row
         songRow.appendChild(songDataGenre);
 
         //create td for popularity
         const songDataPopularity = document.createElement("td");
+        //add data inside of td
         songDataPopularity.textContent = s["details"]["popularity"];
+        //add the popularity td to the row
         songRow.appendChild(songDataPopularity);
 
         //create td for addToPlaylist
         const playlistButton = document.createElement("button");
+        //add data inside of td
         playlistButton.textContent = 'Add';
-
+        //add button to the end of the row
         songRow.appendChild(playlistButton);
         
-        //add the song row to the table body
+        //add the completed song row to the table body
         tableBody.appendChild(songRow);
 
+        //just for testing purpose/debugging
         console.log(songRow);
 
         }
@@ -70,7 +81,26 @@ document.addEventListener("DOMContentLoaded", function() {
         //TESTING sorting for columns, console.log which header was clicked
         const colHeaders = document.querySelector("thead");
         colHeaders.addEventListener("click", function(e){
-            console.log(e.target.id +'Column was clicked!');
+
+            if(e.target.id == 'title'){
+                console.log("Sort by song title")
+            }
+            if(e.target.id == 'artist'){
+                console.log("Sort by artist name")
+            }
+            if(e.target.id == 'year'){
+                console.log("Sort by year released")
+            }
+            if(e.target.id == 'genre'){
+                console.log("Sort by genre")
+            }
+            if(e.target.id == 'popularity'){
+                console.log("Sort by popularity")
+            }
+            console.log(e.target.id +' table header was clicked!');
+
+
+
         })
         
     }
