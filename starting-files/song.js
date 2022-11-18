@@ -55,6 +55,11 @@ document.addEventListener("DOMContentLoaded", function() {
         songDataPopularity.textContent = s["details"]["popularity"];
         songRow.appendChild(songDataPopularity);
 
+        //create td for addToPlaylist
+        const playlistButton = document.createElement("button");
+        playlistButton.textContent = 'Add';
+        
+        songRow.appendChild(playlistButton);
         thead.insertAdjacentElement('afterend',songRow);
         console.log(songRow);
 
