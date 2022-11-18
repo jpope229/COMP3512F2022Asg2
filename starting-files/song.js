@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
         //create td for title 
         const songDataTitle = document.createElement("td");
         songDataTitle.textContent= s["title"];
-        console.log(songDataTitle);
         
         //FOR JUVE this line is outputting the popularity as the first TD instead of the song title, i can't figure out why its doing that
         songRow.insertAdjacentElement('beforeend',songDataTitle);
@@ -60,7 +59,10 @@ document.addEventListener("DOMContentLoaded", function() {
         playlistButton.textContent = 'Add';
 
         songRow.appendChild(playlistButton);
+        
+        //add the song row to the table body
         tableBody.appendChild(songRow);
+
         console.log(songRow);
 
         }
