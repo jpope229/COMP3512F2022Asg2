@@ -29,7 +29,7 @@
     <article class="searchView">
         <div class="column left">
           <h2>Basic Song Search</h2>
-          <form action="index.html" method="get">
+          <form action="index.html" method="get" id="filterBox">
             <input type="radio" id="filterT" name="filterRadio" value="filterT">
             <label for="filterT">.</label>
             <label for="title">Title</label><br>
@@ -37,13 +37,16 @@
             <input type="radio" id="filterA" name="filterRadio" value="filterA">
             <label for="filterA">.</label>
             <label for="artist">Artist</label><br>
-            <select id="artist">
+            <select form_id="filterBox" id="artist" name="artist">
+                <option value="" disabled selected>Select Artist</option>
                 
             </select><br>
             <input type="radio" id="filterG" name="filterRadio" value="filterG">
             <label for="filterG">.</label>
             <label for="genre">Genre</label><br>
-            <select id="genre"></select><br>
+            <select form_id="filterBox" id="genre" name="genre" >
+                <option value="" disabled selected>Select Genre</option>
+            </select><br>
             <input type="reset" value="Clear">
             <input type="submit" value="Filter" id="submit">
           </form>
