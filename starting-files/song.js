@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     
     //Retrieve and display song data
-    const thead = document.getElementById('headerRow');
+    const tableBody = document.getElementById('tBody');
     
     for (let s of songs){
         const songRow = document.createElement("tr");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         //FOR JUVE this line is outputting the popularity as the first TD instead of the song title, i can't figure out why its doing that
         songRow.insertAdjacentElement('beforeend',songDataTitle);
-        thead.insertAdjacentElement('afterend', songRow);
+        tableBody.insertAdjacentElement('afterend', songRow);
 
         //create td for artist name 
         const songDataArtist = document.createElement("td");
@@ -58,12 +58,15 @@ document.addEventListener("DOMContentLoaded", function() {
         //create td for addToPlaylist
         const playlistButton = document.createElement("button");
         playlistButton.textContent = 'Add';
-        
+
         songRow.appendChild(playlistButton);
-        thead.insertAdjacentElement('afterend',songRow);
+        tableBody.appendChild(songRow);
         console.log(songRow);
 
         }
     }
+
+
+
 
 );
