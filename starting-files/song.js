@@ -28,28 +28,32 @@ document.addEventListener("DOMContentLoaded", function() {
         
         //create td for title 
         const songDataTitle = document.createElement("td");
-        songDataTitle.innerText(s["title"]);
+        songDataTitle.textContent="aTestString";
+        console.log(songDataTitle);
         console.log(s["title"]);
+        
+        //FOR JUVE this line is outputting the popularity as the first TD instead of the song title, i can't figure out why its doing that
         songRow.appendChild(songDataTitle);
 
         //create td for artist name 
         const songDataArtist = document.createElement("td");
-        songDataTitle.textContent = s.artist.name;
+        songDataTitle.textContent = s["artist.name"];
         songRow.appendChild(songDataArtist);
 
         //create td for year 
         const songDataYear = document.createElement("td");
-        songDataTitle.textContent = s.year;
+        songDataTitle.textContent = s["year"];
         songRow.appendChild(songDataYear);
 
         //create td for genre
         const songDataGenre = document.createElement("td");
-        songDataTitle.textContent = s.genre.name;
+        songDataTitle.textContent = s["genre.name"];
         songRow.appendChild(songDataGenre);
 
         //create td for popularity
         const songDataPopularity = document.createElement("td");
-        songDataTitle.textContent = s.details.popularity;
+        songDataTitle.textContent = s["details"]["popularity"];
+        console.log(s["details"]["popularity"]);
         songRow.appendChild(songDataPopularity);
 
         console.log(songRow);
