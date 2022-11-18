@@ -97,6 +97,9 @@ document.addEventListener("DOMContentLoaded", function() {
             if(e.target.id == 'popularity'){
                 console.log("Sort by popularity")
             }
+            else{
+                console.log("This header doesn't sort")
+            }
             console.log(e.target.id +' table header was clicked!');
 
 
