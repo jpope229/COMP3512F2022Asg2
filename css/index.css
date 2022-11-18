@@ -16,10 +16,3 @@
     width: 75%;
     background-color: #bbb;
   }
-  
-  /* Clear floats after the columns */
-  .searchView:after {
-    content: "";
-    display: table;
-    clear: both;
-  }

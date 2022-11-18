@@ -31,18 +31,18 @@
           <h2>Basic Song Search</h2>
           <form action="index.html" method="get" id="filterBox">
             <input type="radio" id="filterT" name="filterRadio" value="filterT">
-            <label for="filterT">.</label>
+            <label for="filterT">By</label>
             <label for="title">Title</label><br>
             <input type="text" id="title" name="title"><br>
             <input type="radio" id="filterA" name="filterRadio" value="filterA">
-            <label for="filterA">.</label>
+            <label for="filterA">By</label>
             <label for="artist">Artist</label><br>
             <select form_id="filterBox" id="artist" name="artist">
                 <option value="" disabled selected>Select Artist</option>
                 
             </select><br>
             <input type="radio" id="filterG" name="filterRadio" value="filterG">
-            <label for="filterG">.</label>
+            <label for="filterG">Select</label>
             <label for="genre">Genre</label><br>
             <select form_id="filterBox" id="genre" name="genre" >
                 <option value="" disabled selected>Select Genre</option>
@@ -56,8 +56,8 @@
           <table id="results">
             <tr id="headerRow">
                 <th>Title</th>
-                <th>Year</th>
                 <th>Artist</th>
+                <th>Year</th>
                 <th>Genre</th>
                 <th>Popularity</th>
                 <th>Add to Favorites</th>
