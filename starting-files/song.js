@@ -66,6 +66,13 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log(songRow);
 
         }
+
+        //TESTING sorting for columns, console.log which header was clicked
+        const colHeaders = document.querySelector("thead");
+        colHeaders.addEventListener("click", function(e){
+            console.log(e.target.id +'Column was clicked!');
+        })
+        
     }
 
 
