@@ -85,19 +85,19 @@ document.addEventListener("DOMContentLoaded", function() {
             if(e.target.id == 'title'){
                 console.log("Sort by song title")
             }
-            if(e.target.id == 'artist'){
+            else if(e.target.id == 'artist'){
                 console.log("Sort by artist name")
             }
-            if(e.target.id == 'year'){
+            else if(e.target.id == 'year'){
                 console.log("Sort by year released")
             }
-            if(e.target.id == 'genre'){
+            else if(e.target.id == 'genre'){
                 console.log("Sort by genre")
             }
-            if(e.target.id == 'popularity'){
+            else if(e.target.id == 'popularity'){
                 console.log("Sort by popularity")
             }
-            else{
+            else if(e.target.id =='add'){
                 console.log("This header doesn't sort")
             }
             console.log(e.target.id +' table header was clicked!');
