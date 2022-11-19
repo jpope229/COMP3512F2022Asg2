@@ -1,7 +1,10 @@
 const genres = JSON.parse(genreList);
 const artists = JSON.parse(artistList);
-const songs = JSON.parse(songList);
+const songsData = JSON.parse(songList);
 document.addEventListener("DOMContentLoaded", function() {
+
+    //this array will store all the songs in the database
+    const songsArray = [];
 
     for (let a of artists) {
         let option = document.createElement("option");
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //Retrieve and display song data
     const tableBody = document.getElementById('tBody');
     
-    for (let s of songs){
+    for (let s of songsData){
         const songRow = document.createElement("tr");
         songRow.setAttribute("songID", s["song_id"]);
         
@@ -73,10 +76,17 @@ document.addEventListener("DOMContentLoaded", function() {
         //add the completed song row to the table body
         tableBody.appendChild(songRow);
 
-        //just for testing purpose/debugging
-        console.log(songRow);
+        const mySong = new Song(s);
+        
+        //add song to all songs array
+        songsArray.push(mySong);
+        
+        console.log(mySong);
 
         }
+        
+        //TEST outputting the array to console
+        console.log(songsArray);
 
         //TESTING sorting for columns, console.log which header was clicked
         const tableContent = document.getElementById("tBody")
@@ -94,6 +104,12 @@ document.addEventListener("DOMContentLoaded", function() {
           return row;
         };
         
+        const getTableContent = (data) => {
+            data.map((obj) => {
+              const row = createRow(obj);
+              tableContent.appendChild(row);
+            });
+          };
      
         
         const sortData = (data, param, direction = "asc") => {
@@ -119,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   return 0;
                 });
         
-        
+                getTableContent(sortedData);
         };
         
         const resetButtons = (event) => {
@@ -146,7 +162,15 @@ document.addEventListener("DOMContentLoaded", function() {
             });
           });
         });
-        
+       
+        function Song(s) {
+        this.title = s["title"];
+        this.artist = s["artist"];
+        this.year = s["year"];
+        this.genre = s["genre"]["name"];
+        this.popularity= s["details"]["popularity"];
+        this.songID = s["song_id"];
+       } 
     }
 
 
