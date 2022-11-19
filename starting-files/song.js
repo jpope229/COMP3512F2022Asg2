@@ -94,12 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
           return row;
         };
         
-        const getTableContent = (data) => {
-          data.map((obj) => {
-            const row = createRow(obj);
-            tableContent.appendChild(row);
-          });
-        };
+     
         
         const sortData = (data, param, direction = "asc") => {
           tableContent.innerHTML = '';
@@ -124,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
                   return 0;
                 });
         
-          getTableContent(sortedData);
+        
         };
         
         const resetButtons = (event) => {
@@ -136,13 +131,13 @@ document.addEventListener("DOMContentLoaded", function() {
         };
         
         window.addEventListener("load", () => {
-          getTableContent(songList);
+       
         
           [...tableButtons].map((button) => {
             button.addEventListener("click", (e) => {
               resetButtons(e);
               if (e.target.getAttribute("data-dir") == "desc") {
-                sortData(response.pokedata, e.target.id, "desc");
+                sortData(songList, e.target.id, "desc");
                 e.target.setAttribute("data-dir", "asc");
               } else {
                 sortData(songList, e.target.id, "asc");
