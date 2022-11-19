@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 sortData(response.pokedata, e.target.id, "desc");
                 e.target.setAttribute("data-dir", "asc");
               } else {
-                sortData(response.pokedata, e.target.id, "asc");
+                sortData(songList, e.target.id, "asc");
                 e.target.setAttribute("data-dir", "desc");
               }
             });
