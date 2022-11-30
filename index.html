@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +9,13 @@
     <script src="starting-files/genres.json"></script>
     <script src="starting-files/artists.json"></script>
     <script src="starting-files/sample-songs.json"></script>
-    <script src="starting-files/song.js"></script>
+    <script type="module" src="starting-files/song.js"></script>
+    <!-- external js files -->
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
     <title>COMP3512F2022ASG2</title>
 </head>
+
 <body>
     <header>
         <div class="headerName">
@@ -22,52 +27,55 @@
             </div>
         </div>
         <div class="nav">
-            <a href="index.html">Home</a>
-            <button>Playlist</button>
+            <a href="index.html" class="custom-btn">Home</a>
+            <button class="custom-btn" id="playlist">Playlist</button>
         </div>
     </header>
     <article class="searchView">
         <div class="column left">
-          <h2>Basic Song Search</h2>
-          <form action="index.html" method="get" id="filterBox">
-            <input type="radio" id="filterT" name="filterRadio" value="filterT">
-            <label for="filterT">By</label>
-            <label for="title">Title</label><br>
-            <input type="text" id="title" name="title"><br>
-            <input type="radio" id="filterA" name="filterRadio" value="filterA">
-            <label for="filterA">By</label>
-            <label for="artist">Artist</label><br>
-            <select form_id="filterBox" id="artist" name="artist">
-                <option value="" disabled selected>Select Artist</option>
-                
-            </select><br>
-            <input type="radio" id="filterG" name="filterRadio" value="filterG">
-            <label for="filterG">Select</label>
-            <label for="genre">Genre</label><br>
-            <select form_id="filterBox" id="genre" name="genre" >
-                <option value="" disabled selected>Select Genre</option>
-            </select><br>
-            <input type="reset" value="Clear">
-            <input type="submit" value="Filter" id="submit">
-          </form>
+            <h2>Basic Song Search</h2>
+            <form action="index.html" method="get" id="filterBox">
+                <input type="radio" id="filterT" name="filterRadio" value="filterT">
+                <label for="filterT">By</label>
+                <label for="title">Title</label><br>
+                <input type="text" id="title" name="title"><br>
+                <input type="radio" id="filterA" name="filterRadio" value="filterA">
+                <label for="filterA">By</label>
+                <label for="artist">Artist</label><br>
+                <select form_id="filterBox" id="artist" name="artist">
+                    <option value="" disabled selected>Select Artist</option>
+
+                </select><br>
+                <input type="radio" id="filterG" name="filterRadio" value="filterG">
+                <label for="filterG">Select</label>
+                <label for="genre">Genre</label><br>
+                <select form_id="filterBox" id="genre" name="genre">
+                    <option value="" disabled selected>Select Genre</option>
+                </select><br>
+                <input type="reset" value="Clear">
+                <input type="submit" value="Filter" id="submit">
+            </form>
         </div>
         <div class="column right">
-          <h2>Browse/Search Results</h2>
-          <table id="results">
-            <thead id="headerRow">
-                <th id="title">Title</th>
-                <th id="artist">Artist</th>
-                <th id="year">Year</th>
-                <th id="genre">Genre</th>
-                <th id="popularity">Popularity</th>
-                <th id="add">Add to Playlist</th>
-            </thead>
-            <tbody id="tBody">
+            <h2 class="th-header">Search songs</h2>
+            <table id="results">
+                <thead id="headerRow">
+                    <th id="title">Title</th>
+                    <th id="artist">Artist</th>
+                    <th id="year">Year</th>
+                    <th id="genre">Genre</th>
+                    <th id="popularity">Popularity</th>
+                    <th id="add">Add to Playlist</th>
+                </thead>
+                <tbody id="tBody">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
     </article>
+    <div id="successMessage">
+        <h2></h2>
+    </div>
     <footer>
         <div>
             COMP3512F2022<br>
@@ -75,4 +83,5 @@
             <a href='https://github.com/jpope229/COMP3512F2022Asg2'>Github Repository </a><br>
         </div>
 </body>
+
 </html>
