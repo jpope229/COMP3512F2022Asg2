@@ -154,6 +154,7 @@ td {
   justify-content: center;
   align-items: center;
   display: flex;
+  margin: auto;
 }
 .headerName {
   color: white;
@@ -271,5 +272,30 @@ h6 {
   z-index: 1;
   display: none;
 }
+.credits {
+  display: flex;
+  position: absolute;
+  right: 5%;
+  width: 20%;
+  /*margin: auto; */
+}
+.cont {
+  display: flex;
+  position: absolute;
+  background-color: white;
+  top: 30px;
+  left: 5px;
+  z-index: 1;
+  display: none;
+}
+.cont ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+#closeView {
+  display: none;
+}
+
 
   
