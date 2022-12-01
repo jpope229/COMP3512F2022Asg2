@@ -977,7 +977,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // on hover of .crdtshw show .cont for 5sec
   const creditShow = document.querySelector(".crdtshw");
   const creditContent = document.querySelector(".cont");
-  creditShow.addEventListener("onmouseover", () => {
+  creditShow.addEventListener("mouseover", () => {
     creditContent.style.display = "block";
     setTimeout(() => {
       creditContent.style.display = "none";
