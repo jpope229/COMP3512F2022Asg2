@@ -54,6 +54,7 @@ const genres = JSON.parse(localStorage.getItem("genres"));
 const artists = JSON.parse(localStorage.getItem("artists"));
 const songsData = JSON.parse(localStorage.getItem("songsData"));
 
+
 // document.addEventListener("DOMContentLoaded", function () {
 //this array will store all the songs in the database
 const songsArray = [];
@@ -101,7 +102,7 @@ const getUniqueGenres = function (genres) {
     const genreID = genres.find((item) => item.name === genre).id;
     genreIDs.push(genreID);
   });
-  
+  // console.log(genreIDs);
   // merge genre names and ids into one array
   const genreNamesAndIDs = [];
   for (let i = 0; i < uniqueGenres.length; i++) {
@@ -137,7 +138,8 @@ for (let s of songsData) {
   songDataTitle.textContent = s["title"];
   songDataTitle.style.cursor = "pointer";
   // add event listener to td
-  
+  // songDataTitle.addEventListener("click", showSongDetails);
+
   //Insert song title into the TD
   songRow.insertAdjacentElement("beforeend", songDataTitle);
   //add td1 (Song title)
@@ -188,6 +190,8 @@ for (let s of songsData) {
 
   //add song to all songs array
   songsArray.push(mySong);
+
+  // console.log(mySong);
 }
 
 //TEST outputting the array to console
@@ -204,6 +208,10 @@ const createRow = (obj, adtn) => {
     const cell = document.createElement("td");
     cell.setAttribute("data-attr", key);
     cell.innerHTML = obj[key];
+    /* cell.addEventListener("click", (e) => {
+      console.log(e.target);
+    }); */
+
     cell.style.cursor = "pointer";
     row.appendChild(cell);
   });
@@ -291,7 +299,8 @@ const sortByTitle = (data, direction = "asc") => {
     if (a.title > b.title) {
       return 1;
     }
-  return 0;
+
+    return 0;
   });
   if (direction === "desc") {
     sorted.reverse();
@@ -301,7 +310,6 @@ const sortByTitle = (data, direction = "asc") => {
   //   return sorted;
   getTableContent(sorted);
 };
-
 // sort by artist ascending or descending
 const sortByArtist = (data, direction = "asc") => {
   tableContent.innerHTML = "";
@@ -419,7 +427,20 @@ const resetButtons = (event) => {
   });
 };
 
-
+/* window.addEventListener("load", () => {
+  [...tableButtons].map((button) => {
+    button.addEventListener("click", (e) => {
+      resetButtons(e);
+      if (e.target.getAttribute("data-dir") == "desc") {
+        sortData(songList, e.target.id, "desc");
+        e.target.setAttribute("data-dir", "asc");
+      } else {
+        sortData(songList, e.target.id, "asc");
+        e.target.setAttribute("data-dir", "desc");
+      }
+    });
+  });
+}); */
 
 function Song(s) {
   this.title = s["title"];
@@ -658,6 +679,9 @@ filterForm();
 const showSongDetails = function (song) {
   // hide table header
   const tableHeader = document.getElementById("headerRow");
+  // show close view
+  const closeView = document.getElementById("closeView");
+  closeView.style.display = "block";
   tableHeader.style.display = "none";
   console.log("Song passed: ", songsData);
   const raw_sondid = song.songID;
@@ -799,6 +823,9 @@ const addSongToPlaylist = function () {
 
 // display playlist function
 const displayPlaylist = function () {
+  // show close view
+  const closeView = document.getElementById("closeView");
+  closeView.style.display = "block";
   tableContent.innerHTML = "";
   // if playlist is empty, display message
   if (playlist.length == 0) {
@@ -930,7 +957,6 @@ const removeFromPlaylist = function (song) {
 
   // display playlist
   displayPlaylist();
-
 };
 
 // document ready
@@ -947,6 +973,21 @@ document.addEventListener("DOMContentLoaded", () => {
   addSongToPlaylist();
   // add onclick to remove from playlist button
   removeFromPlaylistListenner();
+
+  // on hover of .crdtshw show .cont for 5sec
+  const creditShow = document.querySelector(".crdtshw");
+  const creditContent = document.querySelector(".cont");
+  creditShow.addEventListener("mouseover", () => {
+    creditContent.style.display = "block";
+    setTimeout(() => {
+      creditContent.style.display = "none";
+    }, 5000);
+  });
+  // closeView on click
+  const closeView = document.getElementById("closeView");
+  closeView.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
 });
 
 
