@@ -53,13 +53,18 @@ if (
 const genres = JSON.parse(localStorage.getItem("genres"));
 const artists = JSON.parse(localStorage.getItem("artists"));
 const songsData = JSON.parse(localStorage.getItem("songsData"));
-
+/* console.log(genres);
+console.log(artists);
+console.log(songsData);*/
 
 // document.addEventListener("DOMContentLoaded", function () {
 //this array will store all the songs in the database
 const songsArray = [];
-// playlist array
-const playlist = [];
+// check if playlist is in localStorage and if not, create it
+if (localStorage.getItem("playlist") === null) {
+  const playlist = [];
+  localStorage.setItem("playlist", JSON.stringify(playlist));
+}
 
 // unique artists function
 const getUniqueArtists = function (artists) {
@@ -234,6 +239,10 @@ const createRow = (obj, adtn) => {
   row.setAttribute("songid", songID.songID);
 
   // onclick of first td in row (song title), showSongDetails
+  /* const songTitle = row.querySelector("td");
+  songTitle.addEventListener("click", showSongDetails);
+  songTitle.style.cursor = "pointer"; */
+
   return row;
 };
 
@@ -286,6 +295,8 @@ const getTableContentFiltered = (data) => {
   addPop();
   color();
   alternateRowColors();
+  displaySongDetails();
+  addSongToPlaylist();
 };
 
 // sort by title ascending or descending
@@ -310,6 +321,20 @@ const sortByTitle = (data, direction = "asc") => {
   //   return sorted;
   getTableContent(sorted);
 };
+/* const sortByTitle = (data) => {
+  data.sort((a, b) => {
+    if (a.title < b.title) {
+      return -1;
+    }
+    if (a.title > b.title) {
+      return 1;
+    }
+
+    return 0;
+  });
+  tableContent.innerHTML = "";
+  getTableContent(data);
+}; */
 // sort by artist ascending or descending
 const sortByArtist = (data, direction = "asc") => {
   tableContent.innerHTML = "";
@@ -696,21 +721,18 @@ const showSongDetails = function (song) {
   const durationString = `${minutes}:${seconds}`;
   // anychart data table
   var data = [
-    // { x: "bpm", value: song.details.bpm },
-    { x: "energy", value: newSong.analytics.energy },
-    // { x: "Loudness", value: song.details.loudness },
     { x: "Danceability", value: newSong.analytics.danceability },
-    { x: "Valence", value: newSong.analytics.valence },
+    { x: "energy", value: newSong.analytics.energy },
+    { x: "Speechiness", value: newSong.analytics.speechiness },
     { x: "Acousticness", value: newSong.analytics.acousticness },
     { x: "Liveness", value: newSong.analytics.liveness },
-    { x: "Speechiness", value: newSong.analytics.speechiness },
-    // { x: "Popularity", value: song.details.popularity },
+    { x: "Valence", value: newSong.analytics.valence },
   ];
 
   // create radar chart
   var chart = anychart.radar();
   // set chart yScale settings
-  chart.yScale().minimum(35).maximum(65).ticks({ interval: 5 });
+  chart.yScale().minimum(-15).maximum(100).ticks({ interval: 5 });
 
   // create first series
   chart.line(data);
@@ -782,6 +804,8 @@ const displaySongDetails = function () {
 // add to playlist function
 const addToPlaylist = function (song) {
   console.log("Song passed: ", song);
+  // get local storage playlist
+  const playlist = JSON.parse(localStorage.getItem("playlist"));
   // check if song is already in playlist array
   const songInPlaylist = playlist.find((playlistSong) => {
     return playlistSong.song_id == song.song_id;
@@ -789,6 +813,8 @@ const addToPlaylist = function (song) {
   // if song is not in playlist array, add it
   if (!songInPlaylist) {
     playlist.push(song);
+    // update local storage
+    localStorage.setItem("playlist", JSON.stringify(playlist));
     // console.log("Playlist: ", playlist);
     // show success message and hide after 2 seconds
     const successMessage = document.getElementById("successMessage");
@@ -826,11 +852,58 @@ const displayPlaylist = function () {
   // show close view
   const closeView = document.getElementById("closeView");
   closeView.style.display = "block";
+
   tableContent.innerHTML = "";
+  // get playlist from local storage
+  const playlist = JSON.parse(localStorage.getItem("playlist"));
+  // console.log("Playlist: ", playlist);
   // if playlist is empty, display message
   if (playlist.length == 0) {
     tableContent.innerHTML = "Playlist is empty";
   } else {
+    // check if clear playlist button is already in the DOM
+    const clearPlaylistBtn = document.getElementsByClassName("clear-playlist");
+    // if clear playlist button is not in the DOM, add it
+    if (clearPlaylistBtn.length == 0) {
+      // add clear playlist button
+      const clearPlaylistBtn = document.createElement("button");
+      clearPlaylistBtn.innerHTML = "Clear Playlist";
+      clearPlaylistBtn.classList.add("clear-playlist");
+      // add red color to button
+      clearPlaylistBtn.style.backgroundColor = "red";
+      // add white color to text
+      clearPlaylistBtn.style.color = "white";
+      clearPlaylistBtn.classList.add("custom-btn");
+      clearPlaylistBtn.addEventListener("click", () => {
+        // clear local storage
+        localStorage.removeItem("playlist");
+        // reload page
+        location.reload();
+      });
+      // append to .nav
+      const nav = document.querySelector(".nav");
+      nav.appendChild(clearPlaylistBtn);
+    }
+    // playlist summary
+    // get number of songs in playlist
+    const numberOfSongs = playlist.length;
+    console.log("Number of songs: ", numberOfSongs);
+    // average popularity
+    const averagePopularityRaw = playlist.reduce((total, song) => {
+      return total + song.details.popularity;
+    }, 0);
+    const averagePopularity = Math.round(averagePopularityRaw / numberOfSongs);
+    console.log("Average popularity: ", averagePopularity);
+    // make .playlistSummary div visible
+    const playlistSummary = document.querySelector(".playlistSummary");
+    playlistSummary.style.display = "block";
+    // append no of songs to #playSongs
+    const playSongs = document.getElementById("playSongs");
+    playSongs.innerHTML = numberOfSongs;
+    // append average popularity to #playPopularity
+    const playPopularity = document.getElementById("playPopularity");
+    playPopularity.innerHTML = averagePopularity;
+
     // if playlist is not empty, display table
     getTableContentPlaylist(playlist);
     // removeFromPlaylist();
@@ -915,8 +988,8 @@ const removeFromPlaylistListenner = function () {
   removeFromPlaylistBtn.forEach((btn, index) => {
     btn.addEventListener("click", () => {
       const songId = btn.getAttribute("songid");
-      console.log("Song id: ", songId);
-      console.log("Songs data: ", songsData);
+      /* console.log("Song id: ", songId);
+      console.log("Songs data: ", songsData); */
       const song = songsData.find((song) => {
         return song.song_id == songId;
       });
@@ -928,12 +1001,15 @@ const removeFromPlaylistListenner = function () {
 
 // remove from playlist function
 const removeFromPlaylist = function (song) {
-  console.log("Song passed: ", song);
+  // console.log("Song passed: ", song);
+  // get local storage playlist
+  const playlist = JSON.parse(localStorage.getItem("playlist"));
+  // console.log("Playlist: ", playlist);
   // check if song is already in playlist array
   const songInPlaylist = playlist.find((playlistSong) => {
     return playlistSong.song_id == song.songID;
   });
-  console.log("Song in playlist: ", playlist);
+  // console.log("Song in playlist: ", playlist);
   // if song is not in playlist array, display message
   if (!songInPlaylist) {
     alert("Song is not in playlist");
@@ -942,6 +1018,8 @@ const removeFromPlaylist = function (song) {
     for (let i = 0; i < playlist.length; i++) {
       if (playlist[i].song_id == song.songID) {
         playlist.splice(i, 1);
+        // update local storage
+        localStorage.setItem("playlist", JSON.stringify(playlist));
       }
     }
     // show success message and hide after 2 seconds
@@ -989,5 +1067,3 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "index.html";
   });
 });
-
-
