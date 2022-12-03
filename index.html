@@ -18,7 +18,6 @@
     <script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-radar.min.js"></script>
     <title>COMP3512F2022ASG2</title>
 </head>
-
 <body>
     <header>
         <div class="headerName">
@@ -51,6 +50,20 @@
         </div>
     </header>
     <article class="searchView">
+        <!-- playlist summary view -->
+        <div class="playlistSummary">
+            <h2>Playlist Summary</h2>
+            <div class="summary">
+                <div class="summaryInfo">
+                    <h4>Songs in playlist:</h4>
+                    <p id="playSongs"></p>
+                </div>
+                <div class="summaryInfo">
+                    <h4>Average song Popularity:</h4>
+                    <p id="playPopularity"></p>
+                </div>
+            </div>
+        </div>
         <div class="column left">
             <h2>Basic Song Search</h2>
             <form action="index.html" method="get" id="filterBox">
