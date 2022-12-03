@@ -296,6 +296,17 @@ h6 {
 #closeView {
   display: none;
 }
-
-
-  
+.playlistSummary {
+  display: none;
+}
+.summary,
+.summaryInfo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  padding-right: 20px;
+}
