@@ -739,6 +739,8 @@ const showSongDetails = function (song) {
 
   // set chart title
   chart.title("Radar Chart");
+  console.log("newSong song is ", newSong);
+  console.log("newSong song is ", song);
 
   tableContent.innerHTML = `
   <div class="songDetails">
@@ -746,20 +748,20 @@ const showSongDetails = function (song) {
                 <h3>Song information</h3>
                 <h4 id="songTitle">Song Title: ${song.title}</h4>
                 <h5 id="songArtist">Artist: ${song.artist.name}</h5>
-                <h5 id="songGenre">Genre: ${song.genre.name}</h5>
+                <h5 id="songGenre">Genre: ${song.genre}</h5>
                 <h5 id="songYear">Year: ${song.year}</h5>
                 <h5 id="songDuration">Duration: ${durationString} Minutes</h5>
                 
                 <h4>Analysis data</h4>
-                <h5 id="bpm">pm: </h5>
-                <h5 id="songEnergy">Energy: </h5>
-                <h5 id="songLoudness">Loudness: </h5>
-                <h5 id="songDanceability">Danceability: </h5>
-                <h5 id="songLiveness">Liveness: </h5>
-                <h5 id="songValence">Valence: </h5>
-                <h5 id="songAcousticness">Acousticness: </h5>
-                <h5 id="songSpeechiness">Speechiness: </h5>
-                <h5 id="songPopularity">Popularity</h5>
+                <h5 id="bpm">bpm: <b>${newSong.details.bpm}</b></h5>
+                <h5 id="songEnergy">Energy: ${newSong.analytics.energy}</h5>
+                <h5 id="songLoudness">Loudness: ${newSong.details.loudness}</h5>
+                <h5 id="songDanceability">Danceability: ${newSong.analytics.danceability}</h5>
+                <h5 id="songLiveness">Liveness: ${newSong.analytics.liveness}</h5>
+                <h5 id="songValence">Valence: ${newSong.analytics.valence}</h5>
+                <h5 id="songAcousticness">Acousticness: ${newSong.analytics.acousticness}</h5>
+                <h5 id="songSpeechiness">Speechiness: ${newSong.analytics.speechiness}</h5>
+                <h5 id="songPopularity">Popularity: ${newSong.details.popularity}</h5>
             </div>
             
             <div class="song-radar">
