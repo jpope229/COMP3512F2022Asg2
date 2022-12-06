@@ -53,10 +53,6 @@ if (
 const genres = JSON.parse(localStorage.getItem("genres"));
 const artists = JSON.parse(localStorage.getItem("artists"));
 const songsData = JSON.parse(localStorage.getItem("songsData"));
-/* console.log(genres);
-console.log(artists);
-console.log(songsData);*/
-
 // document.addEventListener("DOMContentLoaded", function () {
 //this array will store all the songs in the database
 const songsArray = [];
@@ -199,9 +195,6 @@ for (let s of songsData) {
   // console.log(mySong);
 }
 
-//TEST outputting the array to console
-// console.log(songsArray);
-
 //TESTING sorting for columns, console.log which header was clicked
 const tableContent = document.getElementById("tBody");
 const tableButtons = document.querySelectorAll("th ");
@@ -213,10 +206,6 @@ const createRow = (obj, adtn) => {
     const cell = document.createElement("td");
     cell.setAttribute("data-attr", key);
     cell.innerHTML = obj[key];
-    /* cell.addEventListener("click", (e) => {
-      console.log(e.target);
-    }); */
-
     cell.style.cursor = "pointer";
     row.appendChild(cell);
   });
@@ -237,13 +226,7 @@ const createRow = (obj, adtn) => {
   playlistButton.setAttribute("songID", songID.songID);
   //add sond id to the end of the row
   row.setAttribute("songid", songID.songID);
-
-  // onclick of first td in row (song title), showSongDetails
-  /* const songTitle = row.querySelector("td");
-  songTitle.addEventListener("click", showSongDetails);
-  songTitle.style.cursor = "pointer"; */
-
-  return row;
+ return row;
 };
 
 const getTableContent = (data) => {
@@ -321,29 +304,16 @@ const sortByTitle = (data, direction = "asc") => {
   //   return sorted;
   getTableContent(sorted);
 };
-/* const sortByTitle = (data) => {
-  data.sort((a, b) => {
-    if (a.title < b.title) {
-      return -1;
-    }
-    if (a.title > b.title) {
-      return 1;
-    }
 
-    return 0;
-  });
-  tableContent.innerHTML = "";
-  getTableContent(data);
-}; */
 // sort by artist ascending or descending
 const sortByArtist = (data, direction = "asc") => {
   tableContent.innerHTML = "";
   console.log("sorting by artist");
   const sorted = data.sort((a, b) => {
-    if (a.artist.name < b.artist.name) {
+    if (a.artist.name.toUpperCase() < b.artist.name.toUpperCase()) {
       return -1;
     }
-    if (a.artist.name > b.artist.name) {
+    if (a.artist.name.toUpperCase() > b.artist.name.toUpperCase) {
       return 1;
     }
 
@@ -380,10 +350,10 @@ const sortByGenre = (data, direction) => {
   tableContent.innerHTML = "";
   console.log("sorting by genre");
   const sorted = data.sort((a, b) => {
-    if (a.genre.name < b.genre.name) {
+    if (a.genre< b.genre) {
       return -1;
     }
-    if (a.genre.name > b.genre.name) {
+    if (a.genre > b.genre) {
       return 1;
     }
 
@@ -400,13 +370,12 @@ const sortByPopularity = (data, direction = "asc") => {
   tableContent.innerHTML = "";
   console.log("sorting by popularity");
   const sorted = [...data].sort((a, b) => {
-    if (a.popularity < b.popularity) {
+    if (a.popularity< b.popularity) {
       return -1;
     }
     if (a.popularity > b.popularity) {
       return 1;
     }
-
     return 0;
   });
   if (direction === "desc") {
@@ -417,56 +386,8 @@ const sortByPopularity = (data, direction = "asc") => {
   //   return sorted;
   getTableContent(sorted);
 };
-
-const sortData = (data, param, direction = "asc") => {
-  tableContent.innerHTML = "";
-  const sortedData =
-    direction == "asc"
-      ? [...data].sort(function (a, b) {
-          if (a[param] < b[param]) {
-            return -1;
-          }
-          if (a[param] > b[param]) {
-            return 1;
-          }
-          return 0;
-        })
-      : [...data].sort(function (a, b) {
-          if (b[param] < a[param]) {
-            return -1;
-          }
-          if (b[param] > a[param]) {
-            return 1;
-          }
-          return 0;
-        });
-
-  getTableContent(sortedData);
-};
-
-const resetButtons = (event) => {
-  [...tableButtons].map((button) => {
-    if (button !== event.target) {
-      button.removeAttribute("data-dir");
-    }
-  });
-};
-
-/* window.addEventListener("load", () => {
-  [...tableButtons].map((button) => {
-    button.addEventListener("click", (e) => {
-      resetButtons(e);
-      if (e.target.getAttribute("data-dir") == "desc") {
-        sortData(songList, e.target.id, "desc");
-        e.target.setAttribute("data-dir", "asc");
-      } else {
-        sortData(songList, e.target.id, "asc");
-        e.target.setAttribute("data-dir", "desc");
-      }
-    });
-  });
-}); */
-
+//construction for function songs
+//defining the function songs
 function Song(s) {
   this.title = s["title"];
   this.artist = s["artist"];
@@ -475,8 +396,6 @@ function Song(s) {
   this.popularity = s["details"]["popularity"];
   this.songID = s["song_id"];
 }
-// });
-
 // sort by title on click of title header
 // on first click of title header, sort by title ascending
 // on second click of title header, sort by title descending
@@ -563,16 +482,16 @@ tableButtons[3].addEventListener("click", () => {
 // on second click of popularity header, sort by popularity descending
 tableButtons[4].addEventListener("click", () => {
   // get id of popularity and add data-dir attribute to it
-  const popularity = document.getElementById("popularity");
-  popularity.setAttribute("data-dir", "asc");
+  //const popularity = document.getElementById("popularity");
+  //popularity.setAttribute("data-dir", "asc");
   const direction = tableButtons[4].getAttribute("data-dir");
   if (direction === "asc") {
-    sortByPopularity(songsArray, "popularity", "desc");
+    sortByPopularity(songsArray, "desc");
     tableButtons[4].setAttribute("data-dir", "desc");
     // add down arrow to popularity header
     tableButtons[4].innerHTML = "Popularity &#9660;";
   } else {
-    sortByPopularity(songsArray, "popularity", "asc");
+    sortByPopularity(songsArray, "asc");
     tableButtons[4].setAttribute("data-dir", "asc");
     // add up arrow to popularity header
     tableButtons[4].innerHTML = "Popularity &#9650;";
@@ -610,7 +529,6 @@ const color = function () {
     if (popScore >= 80) {
       pop.style.backgroundColor = "#00ff00";
      
-
     } else if (popScore >= 60) {
       pop.style.backgroundColor = "#ffff00";
     } else if (popScore >= 40) {
