@@ -590,7 +590,7 @@ const alternateRowColors = function () {
   const tableRows = document.querySelectorAll("tr");
   tableRows.forEach((row, index) => {
     if (index % 2 === 0) {
-      row.style.backgroundColor = "#00382b";
+      row.style.backgroundColor = "#46b3eb";
     }
   });
 };
@@ -609,10 +609,13 @@ const color = function () {
     const popScore = pop.innerHTML;
     if (popScore >= 80) {
       pop.style.backgroundColor = "#00ff00";
+     
+
     } else if (popScore >= 60) {
       pop.style.backgroundColor = "#ffff00";
     } else if (popScore >= 40) {
       pop.style.backgroundColor = "#ff9900";
+
     } else if (popScore >= 20) {
       pop.style.backgroundColor = "#ff0000";
     } else {
