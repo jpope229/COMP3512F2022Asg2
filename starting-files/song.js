@@ -287,10 +287,10 @@ const sortByTitle = (data, direction = "asc") => {
   tableContent.innerHTML = "";
   console.log("sorting by title");
   const sorted = [...data].sort((a, b) => {
-    if (a.title < b.title) {
+    if (a.title.toUpperCase() < b.title.toUpperCase()) {
       return -1;
     }
-    if (a.title > b.title) {
+    if (a.title.toUpperCase() > b.title.toUpperCase()) {
       return 1;
     }
 
@@ -313,7 +313,7 @@ const sortByArtist = (data, direction = "asc") => {
     if (a.artist.name.toUpperCase() < b.artist.name.toUpperCase()) {
       return -1;
     }
-    if (a.artist.name.toUpperCase() > b.artist.name.toUpperCase) {
+    if (a.artist.name.toUpperCase() > b.artist.name.toUpperCase()) {
       return 1;
     }
 
