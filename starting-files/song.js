@@ -527,15 +527,15 @@ const color = function () {
   popularity.forEach((pop) => {
     const popScore = pop.innerHTML;
     if (popScore >= 80) {
-      pop.style.backgroundColor = "#00ff00";
+      pop.style.backgroundColor = "#8fbc8f";
      
     } else if (popScore >= 60) {
-      pop.style.backgroundColor = "#ffff00";
+      pop.style.backgroundColor = "#ffcc61";
     } else if (popScore >= 40) {
-      pop.style.backgroundColor = "#ff9900";
+      pop.style.backgroundColor = "#ea7e7e";
 
     } else if (popScore >= 20) {
-      pop.style.backgroundColor = "#ff0000";
+      pop.style.backgroundColor = "#be1818";
     } else {
       pop.style.backgroundColor = "#990000";
     }
