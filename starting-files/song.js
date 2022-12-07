@@ -529,7 +529,10 @@ const color = function () {
     if (popScore >= 80) {
       pop.style.backgroundColor = "#8fbc8f";
      
-    } else if (popScore >= 60) {
+    }else if (popScore >= 70) {
+      pop.style.backgroundColor = "#d8f468";
+    }
+     else if (popScore >= 60) {
       pop.style.backgroundColor = "#ffcc61";
     } else if (popScore >= 40) {
       pop.style.backgroundColor = "#ea7e7e";
