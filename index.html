@@ -67,14 +67,14 @@
                 <input type="radio" id="filterA" name="filterRadio" value="filterA">
                 <label for="filterA">By</label>
                 <label for="artist">Artist</label><br>
-                <select form_id="filterBox" id="artist" name="artist">
+                <select id="artist" name="artist">
                     <option value="" disabled selected>Select Artist</option>
 
                 </select><br>
                 <input type="radio" id="filterG" name="filterRadio" value="filterG">
                 <label for="filterG">Select</label>
                 <label for="genre">Genre</label><br>
-                <select form_id="filterBox" id="genre" name="genre">
+                <select id="genre" name="genre">
                     <option value="" disabled selected>Select Genre</option>
                 </select><br>
                 <input type="submit" value="Filter" id="submit">
@@ -85,10 +85,10 @@
             <h2 class="th-header">Search songs</h2>
             <table id="results">
                 <thead id="headerRow">
-                    <th id="title">Title</th>
-                    <th id="artist">Artist</th>
+                    <th>Title</th>
+                    <th>Artist</th>
                     <th id="year">Year</th>
-                    <th id="genre">Genre</th>
+                    <th>Genre</th>
                     <th id="popularity">Popularity</th>
                     <th id="add">Add to Playlist</th>
                 </thead>
